@@ -25,3 +25,22 @@ with open(csv_file_path, 'rt') as f:
         for subscription in subscriptions:
             if subscription in row[2]:
                 print(row[2], row[3])
+                
+
+ask_user_email_option = input("Would you like an email copy?")
+if(ask_user_email_option == "YES"):
+    your_email = input("Please enter an email")
+    message = Mail(
+        from_email=my_email,
+        to_emails=your_email,
+        subject='Subscription',
+        html_content=html
+        )
+    try:
+        sg = SendGridAPIClient(key)
+        response = sg.send(message)
+        print(response.status_code)
+        print(response.body)
+        print(response.headers)
+    except Exception:
+        print(Exception)
