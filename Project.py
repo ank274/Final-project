@@ -1,4 +1,10 @@
 import csv
+import pandas as pd
+from dotenv import load_dotenv
+import os
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
+
 subscriptions = []
 while True:
     subscription = input("Please provide your monthly subscriptions or DONE if finished: ")
