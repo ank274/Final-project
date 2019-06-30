@@ -8,6 +8,9 @@ while True:
         subscriptions.append(subscription)
 
 
+#user includes their data in the csv file
+
+            
 csv_file_path = "bank_accounts.csv" # a relative filepath
 
 with open(csv_file_path, 'rt') as f:

@@ -1,5 +1,3 @@
-#sample data - user would include their own statement here
-
 Status,Date,Description,Debit,Credit
 Cleared,06/26/2019,"HUDSON GREENE MARKET JERSEY CITY NJ",9.68,
 Cleared,06/26/2019,"NORDSTROM #0568 ELIZABETHTOWN PA",,-100.80
