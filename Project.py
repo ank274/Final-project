@@ -14,13 +14,13 @@ load_dotenv()
 key = os.environ.get("API")
 my_email = os.environ.get("email")
 try:
-    amount = float(input("Please enter your budget"))
+    amount = float(input("Please enter your budget: "))
 except:
     print("amount needs to be a number")
     exit()
-filename = input("Please enter the name of the csv file")
-column_transaction_name = input("Please enter the column name for transaction")
-column_amount_name = input("Please enter the column name for amount")
+filename = "bank_accounts"
+column_transaction_name = "Description"
+column_amount_name = "Debit"
 try:            
     csv_file_path = pd.read_csv("{}.csv".format(filename),index_col=False) # a relative filepath
 except:
@@ -74,3 +74,17 @@ if(ask_user_email_option == "YES"):
         print(response.headers)
     except Exception:
         print(Exception)
+
+def to_usd(my_price):
+    return "${0:,.2f}".format(my_price)
+
+Price_usd = to_usd(Price)
+amount_usd = to_usd(amount)
+if (Price > amount):
+    print(f"You spent {Price_usd} on subscriptions but only budgeted {amount_usd}. Cancel a subscription")
+elif(Price==amount):
+    print("You are spending your exact budget")
+else:
+    print(f"You spent {Price_usd} on subscriptions, which is below your budget of  {amount_usd}. Good job!")
+
+
