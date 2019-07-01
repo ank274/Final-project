@@ -6,8 +6,11 @@ import os
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 
+def to_usd(my_price):
+    return "${0:,.2f}".format(my_price)
 
 subscriptions = []
+response = ""
 Price = 0 
 i = 0
 load_dotenv()
@@ -48,14 +51,27 @@ for item in saved_transaction_column:
             if(math.isnan(Price)):
                 print("Column was not found with a price")
                 exit()
+
+Price_usd = to_usd(Price)
+amount_usd = to_usd(amount)
+if (Price > amount):
+    print(f"You spent {Price_usd} on subscriptions but only budgeted {amount_usd}. Cancel a subscription")
+    response =f"You spent {Price_usd} on subscriptions but only budgeted {amount_usd}. Cancel a subscription"   
+elif(Price==amount):
+    print("You are spending your exact budget")
+    response = "You are spending your exact budget"
+else:
+    print(f"You spent {Price_usd} on subscriptions, which is below your budget of  {amount_usd}. Good job!")
+    response = f"You spent {Price_usd} on subscriptions, which is below your budget of  {amount_usd}. Good job!"
+
 html = """<html>
 <body>
 <h1>Thank you for using our service<h1>
 <p>The subscriptions {subscriptions}<p/>
 <p>The price you did not want to go over: {amount}</p>
-<p>What we found from the csv: </p>
+<p>What we found from the csv: {response} </p>
 </body>
-</html>""".format(subscriptions = str(subscriptions),amount = amount)
+</html>""".format(subscriptions = str(subscriptions),amount = amount, response = response)
 
 ask_user_email_option = input("Would you like an email copy?")
 if(ask_user_email_option == "YES"):
@@ -75,16 +91,6 @@ if(ask_user_email_option == "YES"):
     except Exception:
         print(Exception)
 
-def to_usd(my_price):
-    return "${0:,.2f}".format(my_price)
 
-Price_usd = to_usd(Price)
-amount_usd = to_usd(amount)
-if (Price > amount):
-    print(f"You spent {Price_usd} on subscriptions but only budgeted {amount_usd}. Cancel a subscription")
-elif(Price==amount):
-    print("You are spending your exact budget")
-else:
-    print(f"You spent {Price_usd} on subscriptions, which is below your budget of  {amount_usd}. Good job!")
 
 
