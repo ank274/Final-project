@@ -46,7 +46,15 @@ for item in saved_transaction_column:
                 print("Column was not found with a price")
                 exit()
             
-
+if (Price > amount):
+    print (Price)
+    print("You are over your monthly subscription budget")
+elif(Price==amount):
+    print(Price)
+    print("You are spending your exact budget")
+else:
+    print(Price)
+    print("You are spending below your maximum budget")
 
 
 # with open(csv_file_path, 'rt') as f:
