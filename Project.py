@@ -1,15 +1,18 @@
 import csv
 import pandas as pd
 import math
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 import os
-# from sendgrid import SendGridAPIClient
-# from sendgrid.helpers.mail import Mail
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
 
 
 subscriptions = []
 Price = 0 
 i = 0
+load_dotenv()
+key = os.environ.get("API")
+my_email = os.environ.get("email")
 try:
     amount = float(input("Please enter your budget"))
 except:
@@ -45,37 +48,29 @@ for item in saved_transaction_column:
             if(math.isnan(Price)):
                 print("Column was not found with a price")
                 exit()
-            
+html = """<html>
+<body>
+<h1>Thank you for using our service<h1>
+<p>The subscriptions {subscriptions}<p/>
+<p>The price you did not want to go over: {amount}</p>
+<p>What we found from the csv: </p>
+</body>
+</html>""".format(subscriptions = str(subscriptions),amount = amount)
 
-
-
-# with open(csv_file_path, 'rt') as f:
-#     reader = csv.reader(f, delimiter=',')
-#     for row in reader:
-        # for subscription in subscriptions:
-        #     if subscription in row[2]:
-        #         Price=float(row[3]) + Price
-        #         print(row[2], row[3])
-        #         print(Price)
-
-
-
-
-
-# ask_user_email_option = input("Would you like an email copy?")
-# if(ask_user_email_option == "YES"):
-#     your_email = input("Please enter an email")
-#     message = Mail(
-#         from_email=my_email,
-#         to_emails=your_email,
-#         subject='Subscription',
-#         html_content=html
-#         )
-#     try:
-#         sg = SendGridAPIClient(key)
-#         response = sg.send(message)
-#         print(response.status_code)
-#         print(response.body)
-#         print(response.headers)
-#     except Exception:
-#         print(Exception)
+ask_user_email_option = input("Would you like an email copy?")
+if(ask_user_email_option == "YES"):
+    your_email = input("Please enter an email")
+    message = Mail(
+        from_email=my_email,
+        to_emails=your_email,
+        subject='Subscription',
+        html_content=html
+        )
+    try:
+        sg = SendGridAPIClient(key)
+        response = sg.send(message)
+        print(response.status_code)
+        print(response.body)
+        print(response.headers)
+    except Exception:
+        print(Exception)
