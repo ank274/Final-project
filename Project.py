@@ -67,9 +67,9 @@ else:
 html = """<html>
 <body>
 <h1>Thank you for using our service<h1>
-<p>The subscriptions {subscriptions}<p/>
-<p>The price you did not want to go over: {amount}</p>
-<p>What we found from the csv: {response} </p>
+<p>The subscription(s) {subscriptions}<p/>
+<p>Your budget: {amount}</p>
+<p>CSV File: {response} </p>
 </body>
 </html>""".format(subscriptions = str(subscriptions),amount = amount, response = response)
 
