@@ -11,13 +11,13 @@ subscriptions = []
 Price = 0 
 i = 0
 try:
-    amount = float(input("Please enter your budget"))
+    amount = float(input("Please enter your budget: "))
 except:
     print("amount needs to be a number")
     exit()
-filename = input("Please enter the name of the csv file")
-column_transaction_name = input("Please enter the column name for transaction")
-column_amount_name = input("Please enter the column name for amount")
+filename = "bank_accounts"
+column_transaction_name = "Description"
+column_amount_name = "Debit"
 try:            
     csv_file_path = pd.read_csv("{}.csv".format(filename),index_col=False) # a relative filepath
 except:
@@ -45,17 +45,18 @@ for item in saved_transaction_column:
             if(math.isnan(Price)):
                 print("Column was not found with a price")
                 exit()
-            
+
+def to_usd(my_price):
+    return "${0:,.2f}".format(my_price)
+
+Price_usd = to_usd(Price)
+amount_usd = to_usd(amount)
 if (Price > amount):
-    print (Price)
-    print("You are over your monthly subscription budget")
+    print(f"You spent {Price_usd} on subscriptions but only budgeted {amount_usd}. Cancel a subscription")
 elif(Price==amount):
-    print(Price)
     print("You are spending your exact budget")
 else:
-    print(Price)
-    print("You are spending below your maximum budget")
-
+    print(f"You spent {Price_usd} on subscriptions, which is below your budget of  {amount_usd}. Good job!")
 
 # with open(csv_file_path, 'rt') as f:
 #     reader = csv.reader(f, delimiter=',')
