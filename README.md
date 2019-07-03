@@ -19,7 +19,7 @@ my_email = "your email"
 
 Lastly, within the .gitignore file, type .env (this should already be done for you)
 *************************************************
-
+Reminder- Put the CSV in the same folder as the Python file
 Next, load your bank statement(s) into the bank_accounts.csv file that has been setup. Please ensure that the description of the transaction  and the value of the transaction are under columns 'Description' and 'Debit', respectively. 
 
 Next, run the program (python Project.py) through your command line, within the virtual environment. 
