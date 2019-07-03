@@ -1,9 +1,24 @@
 # Final-project
 Before using the python program, from within a virtual environment, install the following packages using pip install:
 
-pandas 
-dotenv
-sendgrid==6.0.5
+pandas; 
+dotenv;
+
+******************************************
+Follow the following steps only if you'd like an email copy of your results at the end:
+
+Install 
+
+sendgrid==6.0.5 
+
+in your virtual environment using pip install.
+
+Then go to sendgrid.com and obtain an API key. Create a '.env' file and include your API key as: 
+API = "Input your API". 
+my_email = "your email"
+
+Lastly, within the .gitignore file, type .env (this should already be done for you)
+*************************************************
 
 Next, load your bank statement(s) into the bank_accounts.csv file that has been setup. Please ensure that the description of the transaction  and the value of the transaction are under columns 'Description' and 'Debit', respectively. 
 
