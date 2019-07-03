@@ -73,9 +73,9 @@ html = """<html>
 </body>
 </html>""".format(subscriptions = str(subscriptions),amount = amount, response = response)
 
-ask_user_email_option = input("Would you like an email copy?")
+ask_user_email_option = input("Would you like an email copy? (Enter: YES or NO): ")
 if(ask_user_email_option == "YES"):
-    your_email = input("Please enter an email")
+    your_email = input("Please enter an email: ")
     message = Mail(
         from_email=my_email,
         to_emails=your_email,
@@ -90,7 +90,7 @@ if(ask_user_email_option == "YES"):
         print(response.headers)
     except Exception:
         print(Exception)
-
-
+else: 
+    print("You've selected not to receive an email. Thanks for using the program and see you again soon!")
 
 
