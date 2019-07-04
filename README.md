@@ -3,7 +3,7 @@ Before using the python program, from within a virtual environment, install the 
 
 pandas; 
 dotenv;
-
+pytest (for developers / those who'd like to test the definition function)
 ******************************************
 Follow the following steps only if you'd like an email copy of your results at the end:
 
